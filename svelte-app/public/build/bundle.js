@@ -8290,7 +8290,7 @@ var app = (function () {
     	let socket;
 
     	onMount(() => {
-    		socket = lookup("http://localhost:3001");
+    		socket = lookup("https://dota2-gsi-master-online.onrender.com");
 
     		socket.on("newdata", data => {
     			updatePlayers(data);
