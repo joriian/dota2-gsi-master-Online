@@ -2,7 +2,7 @@
   "name": "dota2-overlay-server",
   "version": "1.0.0",
   "description": "Servidor de overlay para Dota 2 via WebSocket",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
