@@ -2282,7 +2282,7 @@ var app = (function () {
     			append_dev(video, source);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*hero_name*/ 1 && !src_url_equal(source.src, source_src_value = `public/videos/npc_dota_hero_${/*hero_name*/ ctx[0]}.webm`)) {
+    			if (dirty & /*hero_name*/ 1 && !src_url_equal(source.src, source_src_value = `videos/npc_dota_hero_${/*hero_name*/ ctx[0]}.webm`)) {
     				attr_dev(source, "src", source_src_value);
     			}
 
