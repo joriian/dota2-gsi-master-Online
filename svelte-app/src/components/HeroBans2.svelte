@@ -18,7 +18,7 @@
 {:else if hero_name == "none" && hero_name != "banning"}
   <div class="relative w-full h-full bg-red-600 animate-fade-in rounded-[12px] overflow-hidden">
     <img class="h-[55px] w-full grayscale"
-      src="https://dota2-gsi-master-online.onrender.com/assets/portraits/black_image.png"
+      src="https://dota2-gsi-master-online.onrender.com/portraits/black_image.png"
       alt=""
     />
     <div class="absolute inset-0 bg-red-950 opacity-60 rounded-[12px]"></div>
