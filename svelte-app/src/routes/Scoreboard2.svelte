@@ -17,7 +17,7 @@
       hero_healing: {},
     },
   ];
-  const socket = io("http://localhost:3001"); // Replace with your server URL
+  const socket = io("https://dota2-gsi-master-online.onrender.com"); // Replace with your server URL
 
   function formatTime(seconds) {
     seconds = Math.abs(seconds);
