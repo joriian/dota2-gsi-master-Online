@@ -6897,7 +6897,7 @@ var app = (function () {
     function instance$4($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Draft', slots, []);
-    	const socket = lookup("http://localhost:3001");
+    	const socket = lookup("https://dota2-gsi-master-online.onrender.com/");
     	let DRAFT_ACTIVE_TIME_REMAINING = 0;
     	let RADIANT_BONUS_TIME = 0;
     	let DIRE_BONUS_TIME = 0;
