@@ -4,21 +4,21 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:8080", // Atualize se necessário
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
 var d2gsi = require('dota2-gsi');
 var path = require('path');
 
-// GSI escutando localmente (para uso opcional localmente)
+// GSI escutando localmente (apenas se quiser rodar isso localmente também)
 var server = new d2gsi({
     port: 3000,
     tokens: ["production"]
 });
 
 app.use(cors());
-app.use(express.json({ limit: '5mb' })); // Para aceitar JSON grande
+app.use(express.json()); // <- necessário para ler JSON no body
 
 // Log de acesso a arquivos estáticos
 app.use((req, res, next) => {
@@ -28,19 +28,20 @@ app.use((req, res, next) => {
     next();
 });
 
-// Servir arquivos do frontend (Svelte compilado)
+// Servir arquivos estáticos do Svelte compilado
 app.use(express.static(path.join(__dirname, 'svelte-app/public')));
 
-// Rota para clientes remotos enviarem dados
-app.post("/api/relay", (req, res) => {
+// ========== NOVO: endpoint /api/relay ==========
+app.post('/api/relay', (req, res) => {
     const newdata = req.body;
+    console.log("POST recebido em /api/relay");
 
-    if (newdata) {
-        io.emit('newdata', newdata);
-        console.log("Dados recebidos via /api/relay e enviados via socket.io");
+    try {
+        if (newdata) {
+            io.emit('newdata', newdata); // Envia tudo para o frontend
+        }
 
-        // Repetir a lógica de draft se necessário
-        if (newdata.draft) {
+        if (newdata && newdata.draft) {
             const {
                 activeteam,
                 pick,
@@ -86,34 +87,20 @@ app.post("/api/relay", (req, res) => {
                 }
             });
         }
-    }
 
-    res.status(200).send("OK");
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Erro no /api/relay:', error);
+        res.sendStatus(500);
+    }
 });
 
-// GSI local opcional
-server.events.on('newclient', function (client) {
-    console.log("New client connection, IP address: " + client.ip);
-    if (client.auth && client.auth.token) {
-        console.log("Auth token: " + client.auth.token);
-    } else {
-        console.log("No Auth token");
-    }
-
-    client.on('newdata', function (newdata) {
-        try {
-            if (newdata) {
-                io.emit('newdata', newdata);
-            }
-
-            // (Reutiliza a mesma lógica acima, pode ser extraída para uma função para evitar repetição)
-        } catch (error) {
-            console.error('Erro ao tratar newdata:', error);
-        }
-    });
+// Socket.io de debug (opcional)
+io.on('connection', (socket) => {
+    console.log("Frontend conectado via socket.io");
 });
 
-// Porta dinâmica
+// Porta dinâmica para ambientes como Render (ou 3001 localmente)
 const PORT = process.env.PORT || 3001;
 http.listen(PORT, function () {
     console.log(`Servidor rodando na porta ${PORT}`);
