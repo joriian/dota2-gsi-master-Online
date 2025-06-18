@@ -7,7 +7,7 @@
   let videoExists = true;
 
   const baseUrl = "https://dota2-gsi-master-online.onrender.com";
-  const heroVideoSrc = `${baseUrl}/assets/videos/npc_dota_hero_${hero_name}.webm`;
+  const heroVideoSrc = `${baseUrl}/videos/npc_dota_hero_${hero_name}.webm`;
   const pickingVideoSrc = `${baseUrl}/assets/dota2_logo_animated.mp4`;
   const fallbackImageSrc = `${baseUrl}/assets/dota2_logo_static.png`;
 
