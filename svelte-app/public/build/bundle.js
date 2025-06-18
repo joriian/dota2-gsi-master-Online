@@ -8636,7 +8636,7 @@ var app = (function () {
     		}
     	];
 
-    	const socket = lookup("http://localhost:3001"); // Replace with your server URL
+    	const socket = lookup("https://dota2-gsi-master-online.onrender.com"); // Replace with your server URL
     	const DOTA_RADIANT_PLAYER_COLORS = ["#3074F9", "#66FFC0", "#BD00B7", "#F8F50A", "#FF6901"];
     	const DOTA_DIRE_PLAYER_COLORS = ["#FF88C5", "#A2B349", "#63DAFA", "#01831F", "#9F6B00"];
 
