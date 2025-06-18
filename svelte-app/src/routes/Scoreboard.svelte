@@ -15,7 +15,7 @@
 
   let socket;
   onMount(() => {
-    socket = io("http://localhost:3001");
+    socket = io("https://dota2-gsi-master-online.onrender.com/");
     socket.on("newdata", (data) => {
       updatePlayers(data);
     });
