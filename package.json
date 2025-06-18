@@ -10,7 +10,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "socket.io": "^4.7.2",
-    "dota2-gsi": "^1.2.1"
+    "dota2-gsi": "github:xzion/dota2-gsi"
   },
   "engines": {
     "node": ">=16"
